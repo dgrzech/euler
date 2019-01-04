@@ -75,3 +75,19 @@ def prime_factors(n):
 
 def rotations(n):
     return [n[i:] + n[:i] for i in range(len(n))]
+
+
+def sieve_of_eratosthenes(n):
+    primes = [True] * (n + 1)
+    primes[0] = primes[1] = False
+
+    for i in range(2, int(math.sqrt(n) + 1)):
+        if primes[i]:
+            temp = [i ** 2]
+            while temp[-1] + i <= n:
+                temp.append(temp[-1] + i)
+
+            for j in temp:
+                primes[j] = False
+
+    return [i for i in range(len(primes)) if primes[i]]
